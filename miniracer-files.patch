@@ -1,0 +1,49 @@
+diff -urN aa/miniracer-1.03/Makefile miniracer-1.03/Makefile
+--- aa/miniracer-1.03/Makefile	2003-10-14 10:44:02.000000000 +0200
++++ miniracer-1.03/Makefile	2004-07-23 23:40:07.246750280 +0200
+@@ -43,15 +43,16 @@
+ build_release: engine.glx
+ 
+ install:
+-	install -d $(DESTDIR)/usr/bin
+-	install -d $(DESTDIR)/usr/share/man/man6
+-	install -d $(DESTDIR)/usr/share/games/MiniRacer
+-	install -d $(DESTDIR)/usr/share/games/MiniRacer/data
+-	install -m 755 engine.glx $(DESTDIR)/usr/share/games/MiniRacer
+-	install -m 644 data/pak0.pak $(DESTDIR)/usr/share/games/MiniRacer/data	
+-	install -m 644 data/config.cfg $(DESTDIR)/usr/share/games/MiniRacer/data	
+-	install -m 755 miniracer $(DESTDIR)/usr/bin/miniracer
+-	install -m 644 miniracer.6 $(DESTDIR)/usr/share/man/man6
++	install -d $(DESTDIR)$(bindir)
++	install -d $(DESTDIR)$(libdir)/miniracer
++	install -d $(DESTDIR)$(mandir)/man6
++	install -d $(DESTDIR)$(datadir)/MiniRacer
++	install -d $(DESTDIR)$(datadir)/MiniRacer/data
++	install -m 755 engine.glx $(DESTDIR)$(libdir)/miniracer
++	install -m 644 data/pak0.pak $(DESTDIR)$(datadir)/MiniRacer/data	
++	install -m 644 data/config.cfg $(DESTDIR)$(datadir)/MiniRacer/data	
++	install -m 755 miniracer $(DESTDIR)$(bindir)/miniracer
++	install -m 644 miniracer.6 $(DESTDIR)$(mandir)/man6
+ 
+ #############################################################################
+ # GL MiniRacer
+diff -urN aa/miniracer-1.03/miniracer miniracer-1.03/miniracer
+--- aa/miniracer-1.03/miniracer	2003-10-14 11:01:40.000000000 +0200
++++ miniracer-1.03/miniracer	2004-07-23 23:42:11.832810320 +0200
+@@ -1,6 +1,7 @@
+ #!/bin/bash
+ # MiniRacer start script
+ MINIRACERDIR="/usr/share/games/MiniRacer"
++MINIRACERLIBDIR="/usr/lib/miniracer"
+ 
+ # checks for directories
+ if ! [ -d $HOME/.MiniRacer ]; then
+@@ -13,7 +14,7 @@
+ 
+ #checks for files
+ if ! [ -f $HOME/.MiniRacer/engine.glx ]; then
+-    ln -s $MINIRACERDIR/engine.glx $HOME/.MiniRacer
++    ln -s $MINIRACERLIBDIR/engine.glx $HOME/.MiniRacer
+ fi
+ 
+ if ! [ -f $HOME/.MiniRacer/data/pak0.pak ]; then
