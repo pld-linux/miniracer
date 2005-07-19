@@ -1,7 +1,19 @@
-diff -urN aa/miniracer-1.03/Makefile miniracer-1.03/Makefile
---- aa/miniracer-1.03/Makefile	2003-10-14 10:44:02.000000000 +0200
-+++ miniracer-1.03/Makefile	2004-07-23 23:40:07.246750280 +0200
-@@ -43,15 +43,16 @@
+diff -aurN miniracer-1.04.orig/Makefile miniracer-1.04/Makefile
+--- miniracer-1.04.orig/Makefile	2005-05-04 22:55:52.000000000 +0200
++++ miniracer-1.04/Makefile	2005-07-19 19:58:01.000000000 +0200
+@@ -11,9 +11,9 @@
+ BUILDDIR=obj
+ 
+ CC=gcc
+-DEFS=-DVIDMODEXT_GAMMA_RAMP -DSOUND
++DEFS=-DSOUND
+ INCLUDES= -I. -I/usr/X11R6/include -I/usr/include/SDL
+-CFLAGS=$(DEFS) $(INCLUDES) -O3 -march=i486 -ffast-math -fexpensive-optimizations
++CFLAGS=$(DEFS) $(INCLUDES) $(OPTFLAGS)
+ 
+ GL_LDFLAGS=-L/usr/X11R6/lib -lGL -lXxf86dga -lXxf86vm -lX11 -lXext -lm
+ LDFLAGS=$(GL_LDFLAGS) -ldl -lSDL -lSDL_mixer -lpthread
+@@ -43,18 +43,19 @@
  build_release: engine.glx
  
  install:
@@ -9,31 +21,38 @@ diff -urN aa/miniracer-1.03/Makefile miniracer-1.03/Makefile
 -	install -d $(DESTDIR)/usr/share/man/man6
 -	install -d $(DESTDIR)/usr/share/games/MiniRacer
 -	install -d $(DESTDIR)/usr/share/games/MiniRacer/data
+-	install -d $(DESTDIR)/usr/share/games/MiniRacer/data/maps
 -	install -m 755 engine.glx $(DESTDIR)/usr/share/games/MiniRacer
--	install -m 644 data/pak0.pak $(DESTDIR)/usr/share/games/MiniRacer/data	
--	install -m 644 data/config.cfg $(DESTDIR)/usr/share/games/MiniRacer/data	
+-	install -m 644 data/pak0.pak $(DESTDIR)/usr/share/games/MiniRacer/data
+-	install -m 644 data/config.cfg $(DESTDIR)/usr/share/games/MiniRacer/data
 -	install -m 755 miniracer $(DESTDIR)/usr/bin/miniracer
 -	install -m 644 miniracer.6 $(DESTDIR)/usr/share/man/man6
+-	install -m 644 data/maps/*.bsp $(DESTDIR)/usr/share/games/MiniRacer/data/maps
+-	install -m 644 data/maps/maps1.lst $(DESTDIR)/usr/share/games/MiniRacer/data/maps
 +	install -d $(DESTDIR)$(bindir)
-+	install -d $(DESTDIR)$(libdir)/miniracer
-+	install -d $(DESTDIR)$(mandir)/man6
 +	install -d $(DESTDIR)$(datadir)/MiniRacer
 +	install -d $(DESTDIR)$(datadir)/MiniRacer/data
-+	install -m 755 engine.glx $(DESTDIR)$(libdir)/miniracer
-+	install -m 644 data/pak0.pak $(DESTDIR)$(datadir)/MiniRacer/data	
-+	install -m 644 data/config.cfg $(DESTDIR)$(datadir)/MiniRacer/data	
-+	install -m 755 miniracer $(DESTDIR)$(bindir)/miniracer
-+	install -m 644 miniracer.6 $(DESTDIR)$(mandir)/man6
++	install -d $(DESTDIR)$(datadir)/MiniRacer/data/maps
++	install -d $(DESTDIR)$(libdir)/miniracer
++	install -d $(DESTDIR)$(mandir)/man6
++	install -m 755 engine.glx	$(DESTDIR)$(libdir)/miniracer
++	install -m 644 data/pak0.pak	$(DESTDIR)$(datadir)/MiniRacer/data
++	install -m 644 data/config.cfg	$(DESTDIR)$(datadir)/MiniRacer/data
++	install -m 755 miniracer	$(DESTDIR)$(bindir)/miniracer
++	install -m 644 miniracer.6	$(DESTDIR)$(mandir)/man6
++	install -m 644 data/maps/*.bsp	$(DESTDIR)$(datadir)/MiniRacer/data/maps
++	install -m 644 data/maps/maps1.lst $(DESTDIR)$(datadir)/MiniRacer/data/maps
  
  #############################################################################
  # GL MiniRacer
-diff -urN aa/miniracer-1.03/miniracer miniracer-1.03/miniracer
---- aa/miniracer-1.03/miniracer	2003-10-14 11:01:40.000000000 +0200
-+++ miniracer-1.03/miniracer	2004-07-23 23:42:11.832810320 +0200
+diff -aurN miniracer-1.04.orig/miniracer miniracer-1.04/miniracer
+--- miniracer-1.04.orig/miniracer	2005-05-04 22:22:24.000000000 +0200
++++ miniracer-1.04/miniracer	2005-07-19 19:38:51.000000000 +0200
 @@ -1,6 +1,7 @@
  #!/bin/bash
  # MiniRacer start script
- MINIRACERDIR="/usr/share/games/MiniRacer"
+-MINIRACERDIR="/usr/share/games/MiniRacer"
++MINIRACERDIR="/usr/share/MiniRacer"
 +MINIRACERLIBDIR="/usr/lib/miniracer"
  
  # checks for directories
@@ -42,8 +61,8 @@ diff -urN aa/miniracer-1.03/miniracer miniracer-1.03/miniracer
  
  #checks for files
  if ! [ -f $HOME/.MiniRacer/engine.glx ]; then
--    ln -s $MINIRACERDIR/engine.glx $HOME/.MiniRacer
-+    ln -s $MINIRACERLIBDIR/engine.glx $HOME/.MiniRacer
+-	ln -s $MINIRACERDIR/engine.glx $HOME/.MiniRacer
++	ln -s $MINIRACERLIBDIR/engine.glx $HOME/.MiniRacer
  fi
  
  if ! [ -f $HOME/.MiniRacer/data/pak0.pak ]; then
