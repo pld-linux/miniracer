@@ -1,16 +1,20 @@
+# Conditional build:
+%bcond_without	gamma_ramp	# disable VidModeGammaRamp extension
+#
 Summary:	Racing game
 Summary(pl):	Wy¶cigi samochodowe
 Name:		miniracer
-Version:	1.03
+Version:	1.04
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	f0f2c26390a4005a8ae0a057560f7ba4
+# Source0-md5:	9078a3820bda65fac66e8cfc8270c102
 Patch0:		%{name}-files.patch
 URL:		http://miniracer.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_mixer-devel
+BuildRequires:	sed >= 4.0
 Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -33,12 +37,10 @@ gry sieciowej.
 
 %build
 %{__make} \
-	CFLAGS="%{rpmcflags} -I. -I/usr/X11R6/include -I/usr/include/SDL \
-	-DVIDMODEXT_GAMMA_RAMP -DSOUND"
+	OPTFLAGS="%{rpmcflags} \
+	%{?with_gamma_ramp:-DVIDMODEXT_GAMMA_RAMP}"
 
-cp miniracer miniracer.tmp
-cat miniracer.tmp | sed -e 's#/usr/share/games#%{_datadir}#' | \
-	sed -e 's#/usr/lib#%{_libdir}#' > miniracer
+sed -i -e 's#/usr/lib#%{_libdir}#' miniracer
 
 %install
 rm -rf $RPM_BUILD_ROOT
