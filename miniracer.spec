@@ -1,3 +1,4 @@
+#
 # Conditional build:
 %bcond_without	gamma_ramp	# disable VidModeGammaRamp extension
 #
@@ -37,7 +38,12 @@ gry sieciowej.
 
 %build
 %{__make} \
+	CC="%{__cc}" \
+	GL_LDFLAGS="-L/usr/X11R6/%{_lib} -lGL -lXxf86dga -lXxf86vm -lX11 -lXext -lm" \
 	OPTFLAGS="%{rpmcflags} \
+%ifnarch %{ix86}
+	-D_NO_ASM \
+%endif
 	%{?with_gamma_ramp:-DVIDMODEXT_GAMMA_RAMP}"
 
 sed -i -e 's#/usr/lib#%{_libdir}#' miniracer
