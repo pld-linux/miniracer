@@ -9,7 +9,7 @@ Version:	1.04
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/miniracer/%{name}-%{version}.tar.gz
 # Source0-md5:	9078a3820bda65fac66e8cfc8270c102
 Patch0:		%{name}-files.patch
 URL:		http://miniracer.sourceforge.net/
