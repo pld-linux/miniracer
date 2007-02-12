@@ -3,7 +3,7 @@
 %bcond_without	gamma_ramp	# disable VidModeGammaRamp extension
 #
 Summary:	Racing game
-Summary(pl):	Wy¶cigi samochodowe
+Summary(pl.UTF-8):   WyÅ›cigi samochodowe
 Name:		miniracer
 Version:	1.04
 Release:	1
@@ -26,10 +26,10 @@ Miniracer is a now cross-platform racing game. It's featuring
 different cars and tracks. You can play it top-down or first-person.
 Network play is also possible.
 
-%description -l pl
-Miniracer jest wieloplatformow± gr± w wy¶cigi samochodowe. Mo¿na
-¶cigaæ siê wieloma samochodami i na wielu trasach. Mo¿na graæ przy
-widoku z góry lub z perspektywy kierowcy. Kolejn± cech± jest mo¿liwo¶æ
+%description -l pl.UTF-8
+Miniracer jest wieloplatformowÄ… grÄ… w wyÅ›cigi samochodowe. MoÅ¼na
+Å›cigaÄ‡ siÄ™ wieloma samochodami i na wielu trasach. MoÅ¼na graÄ‡ przy
+widoku z gÃ³ry lub z perspektywy kierowcy. KolejnÄ… cechÄ… jest moÅ¼liwoÅ›Ä‡
 gry sieciowej.
 
 %prep
