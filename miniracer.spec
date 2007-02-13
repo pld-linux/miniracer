@@ -3,7 +3,7 @@
 %bcond_without	gamma_ramp	# disable VidModeGammaRamp extension
 #
 Summary:	Racing game
-Summary(pl.UTF-8):   Wyścigi samochodowe
+Summary(pl.UTF-8):	Wyścigi samochodowe
 Name:		miniracer
 Version:	1.04
 Release:	1
