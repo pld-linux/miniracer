@@ -39,7 +39,7 @@ gry sieciowej.
 %build
 %{__make} \
 	CC="%{__cc}" \
-	GL_LDFLAGS="-L/usr/X11R6/%{_lib} -lGL -lXxf86dga -lXxf86vm -lX11 -lXext -lm" \
+	GL_LDFLAGS="-lGL" \
 	OPTFLAGS="%{rpmcflags} \
 %ifnarch %{ix86}
 	-D_NO_ASM \
